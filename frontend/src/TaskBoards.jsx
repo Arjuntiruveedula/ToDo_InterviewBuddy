@@ -126,7 +126,7 @@ const TaskBoards = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/projects');
+        const response = await axios.get('https://to-do-interview-buddy.vercel.app/api/projects');
         setProjects(response.data);
       } catch (error) {
         console.error('Error fetching projects:', error);
@@ -139,7 +139,7 @@ const TaskBoards = () => {
   const handleAddProject = async () => {
     if (newProjectName) {
       try {
-        const response = await axios.post('http://localhost:5000/api/projects', { name: newProjectName });
+        const response = await axios.post('https://to-do-interview-buddy.vercel.app/api/projects', { name: newProjectName });
         setProjects((prevProjects) => [...prevProjects, response.data]);
         setNewProjectName('');
       } catch (error) {
@@ -151,7 +151,7 @@ const TaskBoards = () => {
   const handleAddTask = async (task, projectIndex) => {
     try {
       const projectId = projects[projectIndex]._id; // Get the project ID
-      await axios.post(`http://localhost:5000/api/projects/${projectId}/tasks`, task);
+      await axios.post(`https://to-do-interview-buddy.vercel.app/api/projects/${projectId}/tasks`, task);
       const updatedProjects = [...projects];
       updatedProjects[projectIndex].tasks[task.taskStatus].push(task);
       setProjects(updatedProjects);
@@ -165,7 +165,7 @@ const TaskBoards = () => {
     const taskId = selectedTask._id; // Get the task ID
 
     try {
-      await axios.put(`http://localhost:5000/api/projects/${projectId}/tasks/${taskId}`, updatedTask);
+      await axios.put(`https://to-do-interview-buddy.vercel.app/api/projects/${projectId}/tasks/${taskId}`, updatedTask);
       const updatedProjects = [...projects];
       const currentStatus = selectedTask.taskStatus; // Assuming selectedTask has the status
       const taskIndex = updatedProjects[projectIndex].tasks[currentStatus].findIndex(
@@ -189,7 +189,7 @@ const TaskBoards = () => {
     const projectId = projects[projectIndex]._id; // Get the project ID
 
     try {
-      await axios.delete(`http://localhost:5000/api/projects/${projectId}/tasks/${taskId}`);
+      await axios.delete(`https://to-do-interview-buddy.vercel.app/api/projects/${projectId}/tasks/${taskId}`);
       const updatedProjects = [...projects];
       for (const status in updatedProjects[projectIndex].tasks) {
         updatedProjects[projectIndex].tasks[status] = updatedProjects[projectIndex].tasks[status].filter(task => task._id !== taskId);
