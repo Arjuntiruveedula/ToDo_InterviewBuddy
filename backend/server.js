@@ -12,7 +12,7 @@ const app = express();
 const corsOptions = {
   origin: 'https://to-do-interview-buddy-4ml6.vercel.app',  // Allow only your frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allow only certain methods
-  allowedHeaders: ['Content-Type'],  // Specify which headers are allowed
+   // Specify which headers are allowed
 };
 app.use(cors(corsOptions));  // Apply CORS with the custom configuration
 
