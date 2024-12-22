@@ -9,7 +9,13 @@ const projectRoutes = require('./routes/projects');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: 'https://to-do-interview-buddy-4ml6.vercel.app',  // Allow only your frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allow only certain methods
+  allowedHeaders: ['Content-Type'],  // Specify which headers are allowed
+};
+app.use(cors(corsOptions));  // Apply CORS with the custom configuration
+
 app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
