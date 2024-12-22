@@ -9,7 +9,11 @@ const projectRoutes = require('./routes/projects');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://to-do-interview-buddy-4ml6.vercel.app", // Allow requests from the frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // Optional: Allow cookies if needed
+}));
 app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
